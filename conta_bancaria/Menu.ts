@@ -10,7 +10,7 @@ export function main() {
 
     let contas: ContaController = new ContaController()
 
-    let opcao, numero, agencia, tipo, saldo, limite, aniversario: number
+    let opcao, numero, agencia, tipo, saldo, limite, aniversario, valor, numeroDestino: number
     let titular: string
     const tiposContas = ["Conta Corrente", "Conta Poupança"]
 
@@ -52,8 +52,7 @@ export function main() {
         opcao = readline.questionInt("")
 
         if(opcao === 9){
-            console.log(colors.fg.greenstrong,
-                "\nBanco do Brazil com Z - O seu Futuro começa aqui!")
+            console.log(colors.fg.greenstrong,"\nBanco do Brazil com Z - O seu Futuro começa aqui!")
             sobre()
             console.log(colors.reset, "")
             process.exit(0)
@@ -61,8 +60,7 @@ export function main() {
 
         switch(opcao){
             case 1:
-                console.log(colors.fg.whitestrong,
-                    "\n\nCriar Conta\n\n", colors.reset)
+                console.log(colors.fg.whitestrong,"\n\nCriar Conta\n\n", colors.reset)
                 
                 console.log("Digite o Número da agência: ")
                 agencia = readline.questionInt("")
@@ -96,15 +94,13 @@ export function main() {
                 break;
             
             case 2:
-                console.log(colors.fg.whitestrong,
-                    "\n\nListar todas as Contas\n\n", colors.reset)
+                console.log(colors.fg.whitestrong,"\n\nListar todas as Contas\n\n", colors.reset)
                 contas.listarTodas()
                     keyPress()
                 break;
 
             case 3:
-                console.log(colors.fg.whitestrong,
-                    "\n\nConsultar dados da Conta - por número\n\n", colors.reset)
+                console.log(colors.fg.whitestrong,"\n\nConsultar dados da Conta - por número\n\n", colors.reset)
                 
                 console.log("Digite o número da Conta: ")
                 numero = readline.questionInt("")
@@ -114,8 +110,7 @@ export function main() {
                 break;
 
             case 4:
-                console.log(colors.fg.whitestrong,
-                    "\n\nAtualizar dados da Conta\n\n", colors.reset)
+                console.log(colors.fg.whitestrong,"\n\nAtualizar dados da Conta\n\n", colors.reset)
 
                 console.log("Digite o número da Conta: ")
                 numero = readline.questionInt("")
@@ -154,8 +149,7 @@ export function main() {
                 break;
 
             case 5:
-                console.log(colors.fg.whitestrong,
-                    "\n\nApagar uma Conta\n\n", colors.reset)
+                console.log(colors.fg.whitestrong,"\n\nApagar uma Conta\n\n", colors.reset)
 
                 console.log("Digite o número da Conta: ")
                 numero = readline.questionInt("")
@@ -165,26 +159,52 @@ export function main() {
                 break;
 
             case 6:
-                console.log(colors.fg.whitestrong,
-                    "\n\nSaque\n\n", colors.reset)
+                console.log(colors.fg.whitestrong,"\n\nSaque\n\n", colors.reset)
+
+                console.log("Digite o número da Conta: ")
+                numero = readline.questionInt("")
+
+                console.log("\nDigite o valor do Saque (R$): ")
+                valor = readline.questionFloat("")
+
+                contas.sacar(numero,valor)
+
                 keyPress()
                 break;
 
             case 7:
-                console.log(colors.fg.whitestrong,
-                    "\n\nDepósito\n\n", colors.reset)
+                console.log(colors.fg.whitestrong,"\n\nDepósito\n\n", colors.reset)
+
+                console.log("Digite o número da Conta: ")
+                numero = readline.questionInt("")
+
+                console.log("\nDigite o valor do Depósito (R$): ")
+                valor =readline.questionFloat("")
+
+                contas.depositar(numero,valor)
+
                 keyPress()
                 break;
 
             case 8:
-                console.log(colors.fg.whitestrong,
-                    "\n\nTransferência entre Contas\n\n", colors.reset)
+                console.log(colors.fg.whitestrong,"\n\nTransferência entre Contas\n\n", colors.reset)
+
+                console.log("Digite o número da conta de Origem: ")
+                numero = readline.questionInt("")
+
+                console.log("Digite o número da conta de Destino: ")
+                numeroDestino = readline.questionInt("")
+
+                console.log("\nDigite o valor do Depósito (R$): ")
+                valor = readline.questionFloat("")
+
+                contas.transferir(numero,numeroDestino,valor)
+
                 keyPress()
                 break;
             
             default:
-                console.log(colors.fg.whitestrong,
-                    "\nOpção inválida!\n", colors.reset)
+                console.log(colors.fg.whitestrong,"\nOpção inválida!\n", colors.reset)
                 keyPress()
                 break;
         }
